@@ -294,6 +294,7 @@ function saveKey(){
   const k=document.getElementById('apiKey').value.trim();
   if(!k){setKeyStatus('No key entered.','cleared');return;}
   localStorage.setItem('polygon_api_key',k);
+  apiConnected=false; // force re-test on next scan with new key
   setKeyStatus('Key saved to your browser.','saved');
   document.getElementById('clearKeyBtn').style.display='inline-block';
 }
@@ -398,7 +399,7 @@ const WATCHLIST=()=>myWatchlist.length?myWatchlist:['AAPL','MSFT','NVDA','TSLA',
 const FULL=[...SP500,'SPY','QQQ','IWM','DIA','ARKK','SQQQ','TQQQ','SPXU','UVXY','VXX','SOXL','SOXS','LABU','LABD','TNA','TZA','FAS','FAZ','NUGT','DUST','JNUG','JDST','ERX','ERY','GUSH','DRIP','NAIL','DRN','DRV','HIBL','HIBS','CURE','SICK','WANT','NEED','PILL','CLOV','WISH','WKHS','RIDE','NKLA','GOEV','HIMS','OPEN','OFFERPAD','SPCE','ASTS','LUNR','RKLB','MNTS','IONQ','QUBT','RGTI','ARQQ','BBAI','SOUN','AIOT','AITX','AIXI'];
 
 const filters={doji:true,pinbar:true,gapup:true,gapdown:true,bull:true,bear:false,sound:false,auto:true};
-let scanning=false,signals=[],countdownTimer=null,countdown=60;
+let scanning=false,signals=[],countdownTimer=null,countdown=60,apiConnected=false;
 
 function toggleF(k,btn,colorClass){
   filters[k]=!filters[k];
@@ -589,15 +590,6 @@ async function runScan(){
   const tf=document.getElementById('tfSelect').value;
   const mkt=document.getElementById('mktSelect').value;
   const tickers=mkt==='watch'?WATCHLIST():mkt==='sp500'?SP500:FULL;
-  // Quick connection test before full scan
-  setStatus('Connecting to Polygon.io...','scanning');
-  const testResult=await fetchCandles(apiKey,'AAPL',tf);
-  if(!scanning) return; // auth error triggered inside fetchCandles
-  if(!testResult){
-    setStatus('No data returned — check your API key or try a different timeframe.','');
-    document.getElementById('scanBtn').disabled=false;
-    return;
-  }
   scanning=true;
   document.getElementById('scanBtn').disabled=true;
   document.getElementById('stopBtn').style.display='inline-block';
@@ -656,12 +648,28 @@ function startCountdown(tf){
   },1000);
 }
 
-function startScan(){
+async function startScan(){
+  const apiKey=document.getElementById('apiKey').value.trim();
+  if(!apiKey){setStatus('API key required','');return;}
   signals=[];updateMetrics();
   document.getElementById('mScanned').textContent='0';
   document.getElementById('sigBody').innerHTML='<tr><td colspan="8"><div class="empty">Scanning in progress...</div></td></tr>';
   clearInterval(countdownTimer);
   document.getElementById('timerBadge').textContent='';
+  // Only test connection on first scan or if key changed
+  if(!apiConnected){
+    document.getElementById('scanBtn').disabled=true;
+    setStatus('Connecting to Polygon.io...','scanning');
+    const tf=document.getElementById('tfSelect').value;
+    const test=await fetchCandles(apiKey,'AAPL',tf);
+    if(!test){
+      setStatus('Could not connect — check your API key or timeframe.','');
+      document.getElementById('scanBtn').disabled=false;
+      apiConnected=false;
+      return;
+    }
+    apiConnected=true;
+  }
   runScan();
 }
 
