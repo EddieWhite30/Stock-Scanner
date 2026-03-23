@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -25,163 +24,162 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
 
-.grid-bg {
-position: fixed; inset: 0; z-index: 0;
-background-image: linear-gradient(rgba(79,255,176,0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(79,255,176,0.03) 1px, transparent 1px);
-background-size: 40px 40px;
-pointer-events: none;
-}
+  .grid-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(79,255,176,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(79,255,176,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
 
-.container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
-.brand { display: flex; flex-direction: column; gap: 4px; }
-.brand h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(–text); }
-.brand h1 span { color: var(–accent); }
-.brand p { font-size: 12px; color: var(–muted); font-family: var(–mono); }
-.live-indicator { display: flex; align-items: center; gap: 8px; font-size: 12px; font-family: var(–mono); color: var(–muted); padding: 6px 14px; border: 1px solid var(–border2); border-radius: 20px; background: var(–surface); }
-.dot { width: 7px; height: 7px; border-radius: 50%; background: var(–muted); }
-.dot.live { background: var(–accent); animation: blink 1.4s infinite; }
-.dot.scanning { background: var(–amber); animation: blink 0.7s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+  .brand { display: flex; flex-direction: column; gap: 4px; }
+  .brand h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
+  .brand h1 span { color: var(--accent); }
+  .brand p { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  .live-indicator { display: flex; align-items: center; gap: 8px; font-size: 12px; font-family: var(--mono); color: var(--muted); padding: 6px 14px; border: 1px solid var(--border2); border-radius: 20px; background: var(--surface); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+  .dot.live { background: var(--accent); animation: blink 1.4s infinite; }
+  .dot.scanning { background: var(--amber); animation: blink 0.7s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-.api-bar { display: flex; gap: 10px; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.api-bar input[type=“password”] {
-flex: 1; min-width: 220px; background: var(–surface); border: 1px solid var(–border2);
-border-radius: 8px; padding: 10px 14px; font-family: var(–mono); font-size: 13px;
-color: var(–text); outline: none; transition: border-color 0.2s;
-}
-.api-bar input[type=“password”]:focus { border-color: var(–accent); }
-.api-bar input[type=“password”]::placeholder { color: var(–muted); font-size: 12px; }
-select {
-background: var(–surface); border: 1px solid var(–border2); border-radius: 8px;
-padding: 10px 12px; font-family: var(–sans); font-size: 13px; color: var(–text);
-outline: none; cursor: pointer;
-}
-select:focus { border-color: var(–accent); }
-.btn-scan {
-padding: 10px 22px; border-radius: 8px; font-family: var(–sans); font-size: 13px;
-font-weight: 500; cursor: pointer; border: none;
-background: var(–accent); color: #000; transition: opacity 0.2s, transform 0.1s;
-}
-.btn-scan:hover { opacity: 0.88; }
-.btn-scan:active { transform: scale(0.97); }
-.btn-scan:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn-save {
-padding: 10px 16px; border-radius: 8px; font-family: var(–sans); font-size: 13px;
-font-weight: 500; cursor: pointer; border: 1px solid var(–accent);
-background: transparent; color: var(–accent); transition: background 0.2s;
-}
-.btn-save:hover { background: rgba(79,255,176,0.1); }
-.btn-clear {
-padding: 10px 14px; border-radius: 8px; font-family: var(–sans); font-size: 13px;
-font-weight: 500; cursor: pointer; border: 1px solid var(–border2);
-background: transparent; color: var(–muted); transition: background 0.2s; display: none;
-}
-.btn-clear:hover { background: rgba(255,78,78,0.08); color: var(–red); border-color: var(–red); }
+  .api-bar { display: flex; gap: 10px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .api-bar input[type="password"] {
+    flex: 1; min-width: 220px; background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 8px; padding: 10px 14px; font-family: var(--mono); font-size: 13px;
+    color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  .api-bar input[type="password"]:focus { border-color: var(--accent); }
+  .api-bar input[type="password"]::placeholder { color: var(--muted); font-size: 12px; }
+  select {
+    background: var(--surface); border: 1px solid var(--border2); border-radius: 8px;
+    padding: 10px 12px; font-family: var(--sans); font-size: 13px; color: var(--text);
+    outline: none; cursor: pointer;
+  }
+  select:focus { border-color: var(--accent); }
+  .btn-scan {
+    padding: 10px 22px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; border: none;
+    background: var(--accent); color: #000; transition: opacity 0.2s, transform 0.1s;
+  }
+  .btn-scan:hover { opacity: 0.88; }
+  .btn-scan:active { transform: scale(0.97); }
+  .btn-scan:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-save {
+    padding: 10px 16px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--accent);
+    background: transparent; color: var(--accent); transition: background 0.2s;
+  }
+  .btn-save:hover { background: rgba(79,255,176,0.1); }
+  .btn-clear {
+    padding: 10px 14px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border2);
+    background: transparent; color: var(--muted); transition: background 0.2s; display: none;
+  }
+  .btn-clear:hover { background: rgba(255,78,78,0.08); color: var(--red); border-color: var(--red); }
 
-.watchlist-panel { margin-bottom: 1.5rem; }
-.wl-search-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-.wl-search { flex: 1; min-width: 180px; background: var(–surface); border: 1px solid var(–border2); border-radius: 8px; padding: 9px 14px; font-family: var(–mono); font-size: 13px; color: var(–text); outline: none; text-transform: uppercase; transition: border-color 0.2s; }
-.wl-search::placeholder { font-family: var(–sans); color: var(–muted); text-transform: none; }
-.wl-search:focus { border-color: var(–accent); }
-.btn-wl-add { padding: 9px 16px; border-radius: 8px; font-family: var(–sans); font-size: 13px; font-weight: 500; border: 1px solid var(–accent); background: transparent; color: var(–accent); cursor: pointer; transition: background 0.2s; white-space: nowrap; }
-.btn-wl-add:hover { background: rgba(79,255,176,0.1); }
-.btn-wl-clear { padding: 9px 14px; border-radius: 8px; font-family: var(–sans); font-size: 13px; border: 1px solid var(–border2); background: transparent; color: var(–muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-.btn-wl-clear:hover { border-color: var(–red); color: var(–red); }
-.suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 0; }
-.sug-chip { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-family: var(–mono); border: 1px solid var(–border2); background: var(–surface2); color: var(–muted); cursor: pointer; transition: all 0.15s; }
-.sug-chip:hover { border-color: var(–accent); color: var(–accent); background: rgba(79,255,176,0.07); }
-.wl-label { font-size: 11px; font-family: var(–mono); color: var(–muted); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
-.wl-chips { display: flex; flex-wrap: wrap; gap: 6px; min-height: 32px; padding: 8px; background: var(–surface); border: 1px solid var(–border); border-radius: 8px; }
-.wl-chip { display: flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-family: var(–mono); background: rgba(79,255,176,0.08); border: 1px solid rgba(79,255,176,0.25); color: var(–accent); }
-.wl-chip-remove { cursor: pointer; font-size: 14px; color: var(–muted); line-height: 1; transition: color 0.15s; }
-.wl-chip-remove:hover { color: var(–red); }
-.wl-empty { font-size: 12px; font-family: var(–mono); color: var(–muted); align-self: center; }
-.key-status { font-size: 11px; font-family: var(–mono); margin-top: 4px; }
-.key-status.saved { color: var(–accent); }
-.key-status.cleared { color: var(–muted); }
-.btn-clear-sig {
-padding: 10px 14px; border-radius: 8px; font-family: var(–sans); font-size: 13px;
-font-weight: 500; cursor: pointer; border: 1px solid var(–border2);
-background: transparent; color: var(–muted); transition: all 0.2s;
-}
-.btn-clear-sig:hover { border-color: var(–amber); color: var(–amber); }
-.btn-clear-sig {
-padding: 10px 14px; border-radius: 8px; font-family: var(–sans); font-size: 13px;
-font-weight: 500; cursor: pointer; border: 1px solid var(–border2);
-background: transparent; color: var(–muted); transition: all 0.2s; display:none;
-}
-.btn-clear-sig:hover { border-color: var(–amber); color: var(–amber); }
-.btn-stop {
-padding: 10px 18px; border-radius: 8px; font-family: var(–sans); font-size: 13px;
-font-weight: 500; cursor: pointer; border: 1px solid var(–red);
-background: transparent; color: var(–red); display: none; transition: background 0.2s;
-}
-.btn-stop:hover { background: rgba(255,78,78,0.1); }
+  .watchlist-panel { margin-bottom: 1.5rem; }
+  .wl-search-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .wl-search { flex: 1; min-width: 180px; background: var(--surface); border: 1px solid var(--border2); border-radius: 8px; padding: 9px 14px; font-family: var(--mono); font-size: 13px; color: var(--text); outline: none; text-transform: uppercase; transition: border-color 0.2s; }
+  .wl-search::placeholder { font-family: var(--sans); color: var(--muted); text-transform: none; }
+  .wl-search:focus { border-color: var(--accent); }
+  .btn-wl-add { padding: 9px 16px; border-radius: 8px; font-family: var(--sans); font-size: 13px; font-weight: 500; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .btn-wl-add:hover { background: rgba(79,255,176,0.1); }
+  .btn-wl-clear { padding: 9px 14px; border-radius: 8px; font-family: var(--sans); font-size: 13px; border: 1px solid var(--border2); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .btn-wl-clear:hover { border-color: var(--red); color: var(--red); }
+  .suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 0; }
+  .sug-chip { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-family: var(--mono); border: 1px solid var(--border2); background: var(--surface2); color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .sug-chip:hover { border-color: var(--accent); color: var(--accent); background: rgba(79,255,176,0.07); }
+  .wl-label { font-size: 11px; font-family: var(--mono); color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+  .wl-chips { display: flex; flex-wrap: wrap; gap: 6px; min-height: 32px; padding: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+  .wl-chip { display: flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-family: var(--mono); background: rgba(79,255,176,0.08); border: 1px solid rgba(79,255,176,0.25); color: var(--accent); }
+  .wl-chip-remove { cursor: pointer; font-size: 14px; color: var(--muted); line-height: 1; transition: color 0.15s; }
+  .wl-chip-remove:hover { color: var(--red); }
+  .wl-empty { font-size: 12px; font-family: var(--mono); color: var(--muted); align-self: center; }
+  .key-status { font-size: 11px; font-family: var(--mono); margin-top: 4px; }
+  .key-status.saved { color: var(--accent); }
+  .key-status.cleared { color: var(--muted); }
+  .btn-clear-sig {
+    padding: 10px 14px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border2);
+    background: transparent; color: var(--muted); transition: all 0.2s;
+  }
+  .btn-clear-sig:hover { border-color: var(--amber); color: var(--amber); }
+  .btn-clear-sig {
+    padding: 10px 14px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border2);
+    background: transparent; color: var(--muted); transition: all 0.2s; display:none;
+  }
+  .btn-clear-sig:hover { border-color: var(--amber); color: var(--amber); }
+  .btn-stop {
+    padding: 10px 18px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--red);
+    background: transparent; color: var(--red); display: none; transition: background 0.2s;
+  }
+  .btn-stop:hover { background: rgba(255,78,78,0.1); }
 
-.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center; }
-.filter-row span { font-size: 11px; color: var(–muted); font-family: var(–mono); margin-right: 4px; }
-.fbtn {
-padding: 5px 13px; font-size: 12px; font-family: var(–mono); border-radius: 20px;
-border: 1px solid var(–border2); background: transparent; color: var(–muted);
-cursor: pointer; transition: all 0.15s;
-}
-.fbtn.on { border-color: var(–accent); color: var(–accent); background: rgba(79,255,176,0.07); }
-.fbtn.on.amber { border-color: var(–amber); color: var(–amber); background: rgba(255,184,48,0.07); }
-.fbtn.on.purple { border-color: var(–accent2); color: var(–accent2); background: rgba(123,97,255,0.07); }
+  .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center; }
+  .filter-row span { font-size: 11px; color: var(--muted); font-family: var(--mono); margin-right: 4px; }
+  .fbtn {
+    padding: 5px 13px; font-size: 12px; font-family: var(--mono); border-radius: 20px;
+    border: 1px solid var(--border2); background: transparent; color: var(--muted);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .fbtn.on { border-color: var(--accent); color: var(--accent); background: rgba(79,255,176,0.07); }
+  .fbtn.on.amber { border-color: var(--amber); color: var(--amber); background: rgba(255,184,48,0.07); }
+  .fbtn.on.purple { border-color: var(--accent2); color: var(--accent2); background: rgba(123,97,255,0.07); }
 
-.progress-wrap { margin-bottom: 1rem; }
-.progress-track { height: 2px; background: var(–surface2); border-radius: 2px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(–accent); border-radius: 2px; width: 0%; transition: width 0.3s; }
-.progress-label { display: flex; justify-content: space-between; font-size: 11px; font-family: var(–mono); color: var(–muted); margin-bottom: 6px; }
+  .progress-wrap { margin-bottom: 1rem; }
+  .progress-track { height: 2px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0%; transition: width 0.3s; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 11px; font-family: var(--mono); color: var(--muted); margin-bottom: 6px; }
 
-.metrics { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 1.5rem; }
-.mc { background: var(–surface); border: 1px solid var(–border); border-radius: 10px; padding: 14px 16px; }
-.mc-label { font-size: 11px; font-family: var(–mono); color: var(–muted); margin-bottom: 6px; }
-.mc-val { font-size: 26px; font-weight: 700; color: var(–text); }
-.mc-val.g { color: var(–accent); }
-.mc-val.a { color: var(–amber); }
-.mc-val.p { color: var(–accent2); }
+  .metrics { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .mc { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .mc-label { font-size: 11px; font-family: var(--mono); color: var(--muted); margin-bottom: 6px; }
+  .mc-val { font-size: 26px; font-weight: 700; color: var(--text); }
+  .mc-val.g { color: var(--accent); }
+  .mc-val.a { color: var(--amber); }
+  .mc-val.p { color: var(--accent2); }
 
-.tbl-wrap { border: 1px solid var(–border); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; background: var(–surface); }
-table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
-thead { background: var(–surface2); }
-th { text-align: left; padding: 10px 12px; font-size: 11px; font-family: var(–mono); color: var(–muted); font-weight: 400; border-bottom: 1px solid var(–border); letter-spacing: 0.06em; text-transform: uppercase; }
-td { padding: 10px 12px; border-bottom: 1px solid var(–border); color: var(–text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
-tr:last-child td { border-bottom: none; }
-tr.data-row:hover td { background: var(–surface2); }
-tr.new-signal td { background: rgba(79,255,176,0.04); }
+  .tbl-wrap { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+  thead { background: var(--surface2); }
+  th { text-align: left; padding: 10px 12px; font-size: 11px; font-family: var(--mono); color: var(--muted); font-weight: 400; border-bottom: 1px solid var(--border); letter-spacing: 0.06em; text-transform: uppercase; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  tr.data-row:hover td { background: var(--surface2); }
+  tr.new-signal td { background: rgba(79,255,176,0.04); }
 
-.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: var(–mono); font-weight: 500; }
-.bd { background: rgba(123,97,255,0.15); color: #a78bfa; border: 1px solid rgba(123,97,255,0.3); }
-.bp { background: rgba(255,184,48,0.12); color: var(–amber); border: 1px solid rgba(255,184,48,0.3); }
-.bg { background: rgba(79,255,176,0.1); color: var(–accent); border: 1px solid rgba(79,255,176,0.25); }
-.bgd { background: rgba(255,78,78,0.1); color: var(–red); border: 1px solid rgba(255,78,78,0.25); }
-.bb { background: rgba(79,255,176,0.1); color: var(–accent); border: 1px solid rgba(79,255,176,0.2); }
-.bbe { background: rgba(255,78,78,0.1); color: var(–red); border: 1px solid rgba(255,78,78,0.2); }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: var(--mono); font-weight: 500; }
+  .bd { background: rgba(123,97,255,0.15); color: #a78bfa; border: 1px solid rgba(123,97,255,0.3); }
+  .bp { background: rgba(255,184,48,0.12); color: var(--amber); border: 1px solid rgba(255,184,48,0.3); }
+  .bg { background: rgba(79,255,176,0.1); color: var(--accent); border: 1px solid rgba(79,255,176,0.25); }
+  .bgd { background: rgba(255,78,78,0.1); color: var(--red); border: 1px solid rgba(255,78,78,0.25); }
+  .bb { background: rgba(79,255,176,0.1); color: var(--accent); border: 1px solid rgba(79,255,176,0.2); }
+  .bbe { background: rgba(255,78,78,0.1); color: var(--red); border: 1px solid rgba(255,78,78,0.2); }
 
-.bar-wrap { height: 4px; border-radius: 2px; background: var(–surface2); width: 64px; display: inline-block; vertical-align: middle; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 2px; }
+  .bar-wrap { height: 4px; border-radius: 2px; background: var(--surface2); width: 64px; display: inline-block; vertical-align: middle; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; }
 
-.sym-cell { font-family: var(–mono); font-weight: 500; color: var(–accent); }
-.price-cell { font-family: var(–mono); }
-.gap-pos { color: var(–accent); font-family: var(–mono); }
-.gap-neg { color: var(–red); font-family: var(–mono); }
-.time-cell { color: var(–muted); font-family: var(–mono); font-size: 11px; }
+  .sym-cell { font-family: var(--mono); font-weight: 500; color: var(--accent); }
+  .price-cell { font-family: var(--mono); }
+  .gap-pos { color: var(--accent); font-family: var(--mono); }
+  .gap-neg { color: var(--red); font-family: var(--mono); }
+  .time-cell { color: var(--muted); font-family: var(--mono); font-size: 11px; }
 
-.empty { text-align: center; padding: 3rem 1rem; color: var(–muted); font-size: 13px; font-family: var(–mono); }
-.empty p { margin-top: 8px; font-size: 11px; opacity: 0.6; }
+  .empty { text-align: center; padding: 3rem 1rem; color: var(--muted); font-size: 13px; font-family: var(--mono); }
+  .empty p { margin-top: 8px; font-size: 11px; opacity: 0.6; }
 
-footer { font-size: 11px; color: var(–muted); font-family: var(–mono); line-height: 1.8; border-top: 1px solid var(–border); padding-top: 1rem; }
+  footer { font-size: 11px; color: var(--muted); font-family: var(--mono); line-height: 1.8; border-top: 1px solid var(--border); padding-top: 1rem; }
 
-@media (max-width: 600px) {
-.metrics { grid-template-columns: repeat(2, minmax(0,1fr)); }
-th:nth-child(n+6), td:nth-child(n+6) { display: none; }
-}
+  @media (max-width: 600px) {
+    .metrics { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    th:nth-child(n+6), td:nth-child(n+6) { display: none; }
+  }
 </style>
-
 </head>
 <body>
 <div class="grid-bg"></div>
@@ -322,369 +320,378 @@ function loadSavedKey(){
   }
 }
 
-const ALL_TICKERS=[‘AAPL’,‘MSFT’,‘NVDA’,‘AMZN’,‘META’,‘GOOGL’,‘TSLA’,‘JPM’,‘V’,‘UNH’,‘XOM’,‘MA’,‘LLY’,‘HD’,‘PG’,‘JNJ’,‘AVGO’,‘MRK’,‘CVX’,‘ABBV’,‘PEP’,‘KO’,‘COST’,‘WMT’,‘BAC’,‘CRM’,‘TMO’,‘CSCO’,‘ACN’,‘MCD’,‘ABT’,‘NFLX’,‘WFC’,‘AMD’,‘SOFI’,‘PLTR’,‘COIN’,‘MELI’,‘SHOP’,‘DDOG’,‘SNOW’,‘UBER’,‘RBLX’,‘RIVN’,‘LCID’,‘NIO’,‘AFRM’,‘HOOD’,‘SQ’,‘PYPL’,‘ROKU’,‘ZOOM’,‘DOCU’,‘SPOT’,‘TWLO’,‘NET’,‘ZS’,‘CRWD’,‘OKTA’,‘MDB’,‘BILL’,‘GTLB’,‘PATH’,‘AI’,‘SOUN’,‘IONQ’,‘QUBT’,‘SPY’,‘QQQ’,‘IWM’,‘DIA’,‘GLD’,‘SLV’,‘USO’,‘TLT’,‘HYG’,‘LQD’,‘ARKK’,‘ARKG’,‘ARKW’,‘ARKF’,‘SQQQ’,‘TQQQ’,‘UVXY’,‘VXX’,‘SOXL’,‘SOXS’,‘TNA’,‘TZA’,‘FAS’,‘FAZ’,‘NUGT’,‘DUST’,‘GUSH’,‘DRIP’,‘LABU’,‘LABD’,‘SPXU’,‘SPXL’,‘UPRO’,‘SDOW’,‘UDOW’,‘VIXY’,‘SVXY’,‘BOIL’,‘KOLD’,‘NRGU’,‘NRGD’,‘ERX’,‘ERY’,‘NAIL’,‘DRN’,‘DRV’,‘CURE’,‘HIBL’,‘HIBS’,‘WANT’,‘NEED’,‘PILL’,‘SPCE’,‘ASTS’,‘LUNR’,‘RKLB’,‘MNTS’,‘BBAI’,‘AITX’];
+const ALL_TICKERS=['AAPL','MSFT','NVDA','AMZN','META','GOOGL','TSLA','JPM','V','UNH','XOM','MA','LLY','HD','PG','JNJ','AVGO','MRK','CVX','ABBV','PEP','KO','COST','WMT','BAC','CRM','TMO','CSCO','ACN','MCD','ABT','NFLX','WFC','AMD','SOFI','PLTR','COIN','MELI','SHOP','DDOG','SNOW','UBER','RBLX','RIVN','LCID','NIO','AFRM','HOOD','SQ','PYPL','ROKU','ZOOM','DOCU','SPOT','TWLO','NET','ZS','CRWD','OKTA','MDB','BILL','GTLB','PATH','AI','SOUN','IONQ','QUBT','SPY','QQQ','IWM','DIA','GLD','SLV','USO','TLT','HYG','LQD','ARKK','ARKG','ARKW','ARKF','SQQQ','TQQQ','UVXY','VXX','SOXL','SOXS','TNA','TZA','FAS','FAZ','NUGT','DUST','GUSH','DRIP','LABU','LABD','SPXU','SPXL','UPRO','SDOW','UDOW','VIXY','SVXY','BOIL','KOLD','NRGU','NRGD','ERX','ERY','NAIL','DRN','DRV','CURE','HIBL','HIBS','WANT','NEED','PILL','SPCE','ASTS','LUNR','RKLB','MNTS','BBAI','AITX'];
 
 let myWatchlist = [];
 
 function loadWatchlist(){
-const saved = localStorage.getItem(‘scanner_watchlist’);
-if(saved){ try{ myWatchlist = JSON.parse(saved); }catch(e){ myWatchlist=[]; } }
-renderWatchlist();
+  const saved = localStorage.getItem('scanner_watchlist');
+  if(saved){ try{ myWatchlist = JSON.parse(saved); }catch(e){ myWatchlist=[]; } }
+  renderWatchlist();
 }
 
 function saveWatchlist(){
-localStorage.setItem(‘scanner_watchlist’, JSON.stringify(myWatchlist));
-const badge = document.getElementById(‘wlSavedBadge’);
-badge.style.display=‘inline’;
-setTimeout(()=>{ badge.style.display=‘none’; }, 2500);
+  localStorage.setItem('scanner_watchlist', JSON.stringify(myWatchlist));
+  const badge = document.getElementById('wlSavedBadge');
+  badge.style.display='inline';
+  setTimeout(()=>{ badge.style.display='none'; }, 2500);
 }
 
 function addToWatchlist(sym){
-const val = sym || document.getElementById(‘wlInput’).value.trim().toUpperCase();
-if(!val) return;
-if(myWatchlist.includes(val)){ flashInput(‘Already in watchlist’); return; }
-if(val.length > 6){ flashInput(‘Invalid ticker’); return; }
-myWatchlist.push(val);
-saveWatchlist();
-renderWatchlist();
-document.getElementById(‘wlInput’).value=’’;
-document.getElementById(‘wlSuggestions’).innerHTML=’’;
+  const val = sym || document.getElementById('wlInput').value.trim().toUpperCase();
+  if(!val) return;
+  if(myWatchlist.includes(val)){ flashInput('Already in watchlist'); return; }
+  if(val.length > 6){ flashInput('Invalid ticker'); return; }
+  myWatchlist.push(val);
+  saveWatchlist();
+  renderWatchlist();
+  document.getElementById('wlInput').value='';
+  document.getElementById('wlSuggestions').innerHTML='';
 }
 
 function removeFromWatchlist(sym){
-myWatchlist = myWatchlist.filter(s => s !== sym);
-saveWatchlist();
-renderWatchlist();
+  myWatchlist = myWatchlist.filter(s => s !== sym);
+  saveWatchlist();
+  renderWatchlist();
 }
 
 function clearWatchlist(){
-if(!myWatchlist.length) return;
-myWatchlist = [];
-saveWatchlist();
-renderWatchlist();
+  if(!myWatchlist.length) return;
+  myWatchlist = [];
+  saveWatchlist();
+  renderWatchlist();
 }
 
 function renderWatchlist(){
-const container = document.getElementById(‘wlChips’);
-document.getElementById(‘wlCount’).textContent = myWatchlist.length;
-if(!myWatchlist.length){
-container.innerHTML=’<span class="wl-empty">Add tickers above to build your watchlist</span>’;
-return;
-}
-container.innerHTML = myWatchlist.map(sym =>
-`<span class="wl-chip">${sym}<span class="wl-chip-remove" onclick="removeFromWatchlist('${sym}')">&times;</span></span>`
-).join(’’);
+  const container = document.getElementById('wlChips');
+  document.getElementById('wlCount').textContent = myWatchlist.length;
+  if(!myWatchlist.length){
+    container.innerHTML='<span class="wl-empty">Add tickers above to build your watchlist</span>';
+    return;
+  }
+  container.innerHTML = myWatchlist.map(sym =>
+    `<span class="wl-chip">${sym}<span class="wl-chip-remove" onclick="removeFromWatchlist('${sym}')">&times;</span></span>`
+  ).join('');
 }
 
 function onWlInput(){
-const val = document.getElementById(‘wlInput’).value.trim().toUpperCase();
-const sugBox = document.getElementById(‘wlSuggestions’);
-if(!val){ sugBox.innerHTML=’’; return; }
-const matches = ALL_TICKERS.filter(t => t.startsWith(val) && !myWatchlist.includes(t)).slice(0,8);
-sugBox.innerHTML = matches.map(t =>
-`<span class="sug-chip" onclick="addToWatchlist('${t}')">${t}</span>`
-).join(’’);
+  const val = document.getElementById('wlInput').value.trim().toUpperCase();
+  const sugBox = document.getElementById('wlSuggestions');
+  if(!val){ sugBox.innerHTML=''; return; }
+  const matches = ALL_TICKERS.filter(t => t.startsWith(val) && !myWatchlist.includes(t)).slice(0,8);
+  sugBox.innerHTML = matches.map(t =>
+    `<span class="sug-chip" onclick="addToWatchlist('${t}')">${t}</span>`
+  ).join('');
 }
 
 function flashInput(msg){
-const inp = document.getElementById(‘wlInput’);
-inp.value = msg; inp.style.color=‘var(–red)’;
-setTimeout(()=>{ inp.value=’’; inp.style.color=’’; },1500);
+  const inp = document.getElementById('wlInput');
+  inp.value = msg; inp.style.color='var(--red)';
+  setTimeout(()=>{ inp.value=''; inp.style.color=''; },1500);
 }
 
-window.addEventListener(‘DOMContentLoaded’, () => { loadSavedKey(); loadWatchlist(); });
+window.addEventListener('DOMContentLoaded', () => { loadSavedKey(); loadWatchlist(); });
 
-const SP500=[‘AAPL’,‘MSFT’,‘NVDA’,‘AMZN’,‘META’,‘GOOGL’,‘TSLA’,‘JPM’,‘V’,‘UNH’,‘XOM’,‘MA’,‘LLY’,‘HD’,‘PG’,‘JNJ’,‘AVGO’,‘MRK’,‘CVX’,‘ABBV’,‘PEP’,‘KO’,‘COST’,‘WMT’,‘BAC’,‘CRM’,‘TMO’,‘CSCO’,‘ACN’,‘MCD’,‘ABT’,‘NFLX’,‘WFC’,‘DHR’,‘LIN’,‘TXN’,‘ADBE’,‘NKE’,‘NEE’,‘PM’,‘ORCL’,‘RTX’,‘HON’,‘QCOM’,‘UPS’,‘IBM’,‘AMGN’,‘GE’,‘CAT’,‘SPGI’,‘LOW’,‘BA’,‘INTU’,‘SBUX’,‘PLD’,‘MDT’,‘DE’,‘BLK’,‘GILD’,‘C’,‘AXP’,‘ISRG’,‘AMAT’,‘ADI’,‘REGN’,‘MDLZ’,‘ETN’,‘ZTS’,‘SYK’,‘NOW’,‘MO’,‘SO’,‘VRTX’,‘MMM’,‘EOG’,‘CI’,‘CME’,‘DUK’,‘BMY’,‘ITW’,‘SLB’,‘PNC’,‘USB’,‘ICE’,‘MCO’,‘CL’,‘GS’,‘PYPL’,‘APD’,‘TGT’,‘EMR’,‘PANW’,‘F’,‘GM’,‘UBER’,‘DDOG’,‘SNOW’,‘PLTR’,‘COIN’,‘SOFI’,‘RBLX’,‘AMD’,‘MELI’,‘SHOP’,‘SQ’,‘AFRM’,‘HOOD’];
-const WATCHLIST=()=>myWatchlist.length?myWatchlist:[‘AAPL’,‘MSFT’,‘NVDA’,‘TSLA’,‘AMZN’,‘META’,‘GOOGL’,‘SPY’,‘QQQ’,‘AMD’,‘SOFI’,‘PLTR’,‘COIN’,‘MELI’,‘SHOP’,‘DDOG’];
-const FULL=[…SP500,‘SPY’,‘QQQ’,‘IWM’,‘DIA’,‘ARKK’,‘SQQQ’,‘TQQQ’,‘SPXU’,‘UVXY’,‘VXX’,‘SOXL’,‘SOXS’,‘LABU’,‘LABD’,‘TNA’,‘TZA’,‘FAS’,‘FAZ’,‘NUGT’,‘DUST’,‘JNUG’,‘JDST’,‘ERX’,‘ERY’,‘GUSH’,‘DRIP’,‘NAIL’,‘DRN’,‘DRV’,‘HIBL’,‘HIBS’,‘CURE’,‘SICK’,‘WANT’,‘NEED’,‘PILL’,‘CLOV’,‘WISH’,‘WKHS’,‘RIDE’,‘NKLA’,‘GOEV’,‘HIMS’,‘OPEN’,‘OFFERPAD’,‘SPCE’,‘ASTS’,‘LUNR’,‘RKLB’,‘MNTS’,‘IONQ’,‘QUBT’,‘RGTI’,‘ARQQ’,‘BBAI’,‘SOUN’,‘AIOT’,‘AITX’,‘AIXI’];
+
+const SP500=['AAPL','MSFT','NVDA','AMZN','META','GOOGL','TSLA','JPM','V','UNH','XOM','MA','LLY','HD','PG','JNJ','AVGO','MRK','CVX','ABBV','PEP','KO','COST','WMT','BAC','CRM','TMO','CSCO','ACN','MCD','ABT','NFLX','WFC','DHR','LIN','TXN','ADBE','NKE','NEE','PM','ORCL','RTX','HON','QCOM','UPS','IBM','AMGN','GE','CAT','SPGI','LOW','BA','INTU','SBUX','PLD','MDT','DE','BLK','GILD','C','AXP','ISRG','AMAT','ADI','REGN','MDLZ','ETN','ZTS','SYK','NOW','MO','SO','VRTX','MMM','EOG','CI','CME','DUK','BMY','ITW','SLB','PNC','USB','ICE','MCO','CL','GS','PYPL','APD','TGT','EMR','PANW','F','GM','UBER','DDOG','SNOW','PLTR','COIN','SOFI','RBLX','AMD','MELI','SHOP','SQ','AFRM','HOOD'];
+const WATCHLIST=()=>myWatchlist.length?myWatchlist:['AAPL','MSFT','NVDA','TSLA','AMZN','META','GOOGL','SPY','QQQ','AMD','SOFI','PLTR','COIN','MELI','SHOP','DDOG'];
+const FULL=[...SP500,'SPY','QQQ','IWM','DIA','ARKK','SQQQ','TQQQ','SPXU','UVXY','VXX','SOXL','SOXS','LABU','LABD','TNA','TZA','FAS','FAZ','NUGT','DUST','JNUG','JDST','ERX','ERY','GUSH','DRIP','NAIL','DRN','DRV','HIBL','HIBS','CURE','SICK','WANT','NEED','PILL','CLOV','WISH','WKHS','RIDE','NKLA','GOEV','HIMS','OPEN','OFFERPAD','SPCE','ASTS','LUNR','RKLB','MNTS','IONQ','QUBT','RGTI','ARQQ','BBAI','SOUN','AIOT','AITX','AIXI'];
 
 const filters={doji:true,pinbar:true,gapup:true,gapdown:true,bull:true,bear:false,sound:false,auto:true};
 let scanning=false,signals=[],countdownTimer=null,countdown=60;
 
 function toggleF(k,btn,colorClass){
-filters[k]=!filters[k];
-btn.classList.toggle(‘on’,filters[k]);
-if(colorClass&&filters[k]) btn.classList.add(colorClass);
-else if(colorClass) btn.classList.remove(colorClass);
+  filters[k]=!filters[k];
+  btn.classList.toggle('on',filters[k]);
+  if(colorClass&&filters[k]) btn.classList.add(colorClass);
+  else if(colorClass) btn.classList.remove(colorClass);
 }
 function setDirection(dir,btn){
-if(dir===‘bull’){
-filters.bull=!filters.bull;
-if(filters.bull){filters.bear=false;document.getElementById(‘f-bear’).classList.remove(‘on’);}
-} else {
-filters.bear=!filters.bear;
-if(filters.bear){filters.bull=false;document.getElementById(‘f-bull’).classList.remove(‘on’);}
-}
-btn.classList.toggle(‘on’,filters[dir]);
+  if(dir==='bull'){
+    filters.bull=!filters.bull;
+    if(filters.bull){filters.bear=false;document.getElementById('f-bear').classList.remove('on');}
+  } else {
+    filters.bear=!filters.bear;
+    if(filters.bear){filters.bull=false;document.getElementById('f-bull').classList.remove('on');}
+  }
+  btn.classList.toggle('on',filters[dir]);
 }
 
 function setStatus(msg,state){
-document.getElementById(‘statusText’).textContent=msg;
-const dot=document.getElementById(‘statusDot’);
-dot.className=‘dot’+(state===‘live’?’ live’:state===‘scanning’?’ scanning’:’’);
+  document.getElementById('statusText').textContent=msg;
+  const dot=document.getElementById('statusDot');
+  dot.className='dot'+(state==='live'?' live':state==='scanning'?' scanning':'');
 }
 
 function setProgress(pct,label){
-document.getElementById(‘progressFill’).style.width=Math.round(pct)+’%’;
-document.getElementById(‘progressPct’).textContent=pct>0?Math.round(pct)+’%’:’’;
-if(label) document.getElementById(‘progressLabel’).textContent=label;
+  document.getElementById('progressFill').style.width=Math.round(pct)+'%';
+  document.getElementById('progressPct').textContent=pct>0?Math.round(pct)+'%':'';
+  if(label) document.getElementById('progressLabel').textContent=label;
 }
 
 function playAlert(){
-try{
-const ctx=new(window.AudioContext||window.webkitAudioContext)();
-[[880,0],[1100,0.13],[1320,0.26]].forEach(([freq,delay])=>{
-const o=ctx.createOscillator(),g=ctx.createGain();
-o.connect(g);g.connect(ctx.destination);
-o.frequency.value=freq;o.type=‘sine’;
-g.gain.setValueAtTime(0.15,ctx.currentTime+delay);
-g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay+0.2);
-o.start(ctx.currentTime+delay);o.stop(ctx.currentTime+delay+0.22);
-});
-}catch(e){}
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    [[880,0],[1100,0.13],[1320,0.26]].forEach(([freq,delay])=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=freq;o.type='sine';
+      g.gain.setValueAtTime(0.15,ctx.currentTime+delay);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay+0.2);
+      o.start(ctx.currentTime+delay);o.stop(ctx.currentTime+delay+0.22);
+    });
+  }catch(e){}
 }
 
 function updateMetrics(){
-document.getElementById(‘mSignals’).textContent=signals.length;
-document.getElementById(‘mDoji’).textContent=signals.filter(s=>s.signal===‘Doji’||s.signal===‘Pin bar’).length;
-document.getElementById(‘mGap’).textContent=signals.filter(s=>s.signal===‘Gap up’).length;
-document.getElementById(‘mGapDown’).textContent=signals.filter(s=>s.signal===‘Gap down’).length;
+  document.getElementById('mSignals').textContent=signals.length;
+  document.getElementById('mDoji').textContent=signals.filter(s=>s.signal==='Doji'||s.signal==='Pin bar').length;
+  document.getElementById('mGap').textContent=signals.filter(s=>s.signal==='Gap up').length;
+  document.getElementById('mGapDown').textContent=signals.filter(s=>s.signal==='Gap down').length;
 }
 
 function renderSignals(){
-const body=document.getElementById(‘sigBody’);
-if(!signals.length){
-body.innerHTML=’<tr><td colspan="8"><div class="empty">No signals detected yet.<p>Scanning in progress — signals appear as they are found.</p></div></td></tr>’;
-return;
-}
-body.innerHTML=signals.slice(0,80).map((r,i)=>{
-const bCls=r.signal===‘Doji’?‘bd’:r.signal===‘Pin bar’?‘bp’:r.signal===‘Gap down’?‘bgd’:‘bg’;
-const dCls=r.bull?‘bb’:‘bbe’;
-const gStr=(r.gap>0?’+’:’’)+r.gap.toFixed(2)+’%’;
-const fillC=r.str>65?’#4fffb0’:r.str>35?’#ffb830’:’#ff4e4e’;
-const rowCls=i===0?‘data-row new-signal’:‘data-row’;
-return`<tr class="${rowCls}"> <td class="sym-cell">${r.sym}</td> <td><span class="badge ${bCls}">${r.signal}</span></td> <td><span class="badge ${dCls}">${r.bull?'Bullish':'Bearish'}</span></td> <td class="price-cell">$${r.price.toFixed(2)}</td> <td class="${r.gap>0?'gap-pos':'gap-neg'}">${gStr}</td> <td><span class="bar-wrap"><span class="bar-fill" style="width:${r.str}%;background:${fillC}"></span></span><span style="font-size:11px;color:var(--muted);margin-left:6px;font-family:var(--mono)">${r.str}%</span></td> <td style="font-family:var(--mono);color:var(--muted)">${r.tf}m</td> <td class="time-cell">${r.time}</td> </tr>`;
-}).join(’’);
+  const body=document.getElementById('sigBody');
+  if(!signals.length){
+    body.innerHTML='<tr><td colspan="8"><div class="empty">No signals detected yet.<p>Scanning in progress — signals appear as they are found.</p></div></td></tr>';
+    return;
+  }
+  body.innerHTML=signals.slice(0,80).map((r,i)=>{
+    const bCls=r.signal==='Doji'?'bd':r.signal==='Pin bar'?'bp':r.signal==='Gap down'?'bgd':'bg';
+    const dCls=r.bull?'bb':'bbe';
+    const gStr=(r.gap>0?'+':'')+r.gap.toFixed(2)+'%';
+    const fillC=r.str>65?'#4fffb0':r.str>35?'#ffb830':'#ff4e4e';
+    const rowCls=i===0?'data-row new-signal':'data-row';
+    return`<tr class="${rowCls}">
+      <td class="sym-cell">${r.sym}</td>
+      <td><span class="badge ${bCls}">${r.signal}</span></td>
+      <td><span class="badge ${dCls}">${r.bull?'Bullish':'Bearish'}</span></td>
+      <td class="price-cell">$${r.price.toFixed(2)}</td>
+      <td class="${r.gap>0?'gap-pos':'gap-neg'}">${gStr}</td>
+      <td><span class="bar-wrap"><span class="bar-fill" style="width:${r.str}%;background:${fillC}"></span></span><span style="font-size:11px;color:var(--muted);margin-left:6px;font-family:var(--mono)">${r.str}%</span></td>
+      <td style="font-family:var(--mono);color:var(--muted)">${r.tf}m</td>
+      <td class="time-cell">${r.time}</td>
+    </tr>`;
+  }).join('');
 }
 
 async function fetchCandles(apiKey,symbol,tf){
-const end=new Date();
-// Add buffer days to ensure we always get enough candles including weekends/holidays
-let url;
-if(tf===‘D’){
-// 90 calendar days back = ~60 trading days, plenty for daily gap detection
-const start=new Date(end-1000*60*60*24*90);
-url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=60&apiKey=${apiKey}`;
-} else if(tf===‘240’){
-// 4H — pull 60 days of minute data grouped into 240-min bars
-const start=new Date(end-1000*60*60*24*60);
-url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/240/minute/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=60&apiKey=${apiKey}`;
-} else if(tf===‘W’){
-// 52 weeks back
-const start=new Date(end-1000*60*60*24*7*52);
-url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/week/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=52&apiKey=${apiKey}`;
-} else if(tf===‘M’){
-// 36 months back
-const start=new Date(end-1000*60*60*24*30*36);
-url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/month/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=36&apiKey=${apiKey}`;
-} else {
-// Intraday — scale lookback by timeframe so we always get 30+ candles
-const mins=parseInt(tf);
-const lookbackMs=1000*60*mins*50;
-const start=new Date(end-lookbackMs);
-url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/${mins}/minute/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=50&apiKey=${apiKey}`;
-}
-try{
-const r=await fetch(url);
-const d=await r.json();
-if(d.status===‘ERROR’||d.error){
-const msg=(d.error||d.message||‘API error’).toLowerCase();
-if(msg.includes(‘auth’)||msg.includes(‘key’)||msg.includes(‘unauthorized’)){
-setStatus(‘Invalid API key — please check your Polygon.io key.’,’’);
-scanning=false;
-} else {
-setStatus(‘API error: ‘+( d.error||d.message||‘unknown’),’’);
-}
-return null;
-}
-if(r.status===429){
-// Rate limited — wait 2s and skip this symbol
-await new Promise(res=>setTimeout(res,2000));
-return null;
-}
-if(d.results&&d.results.length>=2) return d.results;
-if(d.resultsCount===0) return null; // valid response but no data (e.g. weekend)
-}catch(e){
-setStatus(‘Network error: ‘+e.message,’’);
-}
-return null;
+  const end=new Date();
+  // Add buffer days to ensure we always get enough candles including weekends/holidays
+  let url;
+  if(tf==='D'){
+    // 90 calendar days back = ~60 trading days, plenty for daily gap detection
+    const start=new Date(end-1000*60*60*24*90);
+    url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=60&apiKey=${apiKey}`;
+  } else if(tf==='240'){
+    // 4H — pull 60 days of minute data grouped into 240-min bars
+    const start=new Date(end-1000*60*60*24*60);
+    url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/240/minute/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=60&apiKey=${apiKey}`;
+  } else if(tf==='W'){
+    // 52 weeks back
+    const start=new Date(end-1000*60*60*24*7*52);
+    url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/week/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=52&apiKey=${apiKey}`;
+  } else if(tf==='M'){
+    // 36 months back
+    const start=new Date(end-1000*60*60*24*30*36);
+    url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/month/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=36&apiKey=${apiKey}`;
+  } else {
+    // Intraday — scale lookback by timeframe so we always get 30+ candles
+    const mins=parseInt(tf);
+    const lookbackMs=1000*60*mins*50;
+    const start=new Date(end-lookbackMs);
+    url=`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/${mins}/minute/${start.toISOString().split('T')[0]}/${end.toISOString().split('T')[0]}?adjusted=true&sort=asc&limit=50&apiKey=${apiKey}`;
+  }
+  try{
+    const r=await fetch(url);
+    const d=await r.json();
+    if(d.status==='ERROR'||d.error){
+      const msg=(d.error||d.message||'API error').toLowerCase();
+      if(msg.includes('auth')||msg.includes('key')||msg.includes('unauthorized')){
+        setStatus('Invalid API key — please check your Polygon.io key.','');
+        scanning=false;
+      } else {
+        setStatus('API error: '+( d.error||d.message||'unknown'),'');
+      }
+      return null;
+    }
+    if(r.status===429){
+      // Rate limited — wait 2s and skip this symbol
+      await new Promise(res=>setTimeout(res,2000));
+      return null;
+    }
+    if(d.results&&d.results.length>=2) return d.results;
+    if(d.resultsCount===0) return null; // valid response but no data (e.g. weekend)
+  }catch(e){
+    setStatus('Network error: '+e.message,'');
+  }
+  return null;
 }
 
 function analyze(sym,candles,tf){
-const last=candles[candles.length-1],prev=candles[candles.length-2];
-const{o:open,c:close,h:high,l:low}=last;
-const body=Math.abs(close-open),range=(high-low)||0.001;
-const lWick=Math.min(open,close)-low,uWick=high-Math.max(open,close);
-const bull=close>=open;
+  const last=candles[candles.length-1],prev=candles[candles.length-2];
+  const{o:open,c:close,h:high,l:low}=last;
+  const body=Math.abs(close-open),range=(high-low)||0.001;
+  const lWick=Math.min(open,close)-low,uWick=high-Math.max(open,close);
+  const bull=close>=open;
 
-// TRUE GAP: open must be strictly outside the prior candle’s full range
-// Gap Up  = current open > prior HIGH (price opened above all of prior candle)
-// Gap Down = current open < prior LOW  (price opened below all of prior candle)
-const gapUpPct   = ((open - prev.h) / prev.h) * 100;   // positive = real gap up
-const gapDownPct = ((prev.l - open) / prev.l) * 100;   // positive = real gap down
+  // TRUE GAP: open must be strictly outside the prior candle's full range
+  // Gap Up  = current open > prior HIGH (price opened above all of prior candle)
+  // Gap Down = current open < prior LOW  (price opened below all of prior candle)
+  const gapUpPct   = ((open - prev.h) / prev.h) * 100;   // positive = real gap up
+  const gapDownPct = ((prev.l - open) / prev.l) * 100;   // positive = real gap down
 
-// Percentage gap vs prior close (used for display and strength)
-const gapVsClose = ((open - prev.c) / prev.c) * 100;
+  // Percentage gap vs prior close (used for display and strength)
+  const gapVsClose = ((open - prev.c) / prev.c) * 100;
 
-// Minimum gap size per timeframe — scaled to typical session volatility
-// Intraday: even tiny gaps matter; Daily+: need meaningful overnight move
-const minGap = tf===‘M’?2.5 : tf===‘W’?1.5 : tf===‘D’?0.75 : tf===‘240’?0.5 : tf===‘60’?0.3 : 0.15;
+  // Minimum gap size per timeframe — scaled to typical session volatility
+  // Intraday: even tiny gaps matter; Daily+: need meaningful overnight move
+  const minGap = tf==='M'?2.5 : tf==='W'?1.5 : tf==='D'?0.75 : tf==='240'?0.5 : tf==='60'?0.3 : 0.15;
 
-// Strength score: how large is the gap relative to the minimum threshold (capped 100)
-const gapStrength=(pct)=>Math.min(100,Math.round((Math.abs(pct)/minGap)*40));
+  // Strength score: how large is the gap relative to the minimum threshold (capped 100)
+  const gapStrength=(pct)=>Math.min(100,Math.round((Math.abs(pct)/minGap)*40));
 
-// Doji body ratio — slightly looser on higher TFs
-const dojiRatio=(tf===‘D’||tf===‘W’||tf===‘M’)?0.2:0.15;
-const pinRatio=0.6;
+  // Doji body ratio — slightly looser on higher TFs
+  const dojiRatio=(tf==='D'||tf==='W'||tf==='M')?0.2:0.15;
+  const pinRatio=0.6;
 
-const time=new Date(last.t).toLocaleTimeString([],{hour:‘2-digit’,minute:‘2-digit’});
-const tfLabel=({‘D’:‘Day’,‘W’:‘Week’,‘M’:‘Month’,‘240’:‘4H’})[tf]||(tf+‘m’);
-const found=[];
-const dirOk=(isBull)=>(!filters.bull&&!filters.bear)||(filters.bull&&isBull)||(filters.bear&&!isBull);
+  const time=new Date(last.t).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const tfLabel=({'D':'Day','W':'Week','M':'Month','240':'4H'})[tf]||(tf+'m');
+  const found=[];
+  const dirOk=(isBull)=>(!filters.bull&&!filters.bear)||(filters.bull&&isBull)||(filters.bear&&!isBull);
 
-// ── Doji ──────────────────────────────────────────────────────────────────
-if(body/range<dojiRatio&&filters.doji&&dirOk(bull))
-found.push({sym,signal:‘Doji’,bull,price:close,gap:gapVsClose,str:Math.round((1-body/range)*100),tf:tfLabel,time});
+  // ── Doji ──────────────────────────────────────────────────────────────────
+  if(body/range<dojiRatio&&filters.doji&&dirOk(bull))
+    found.push({sym,signal:'Doji',bull,price:close,gap:gapVsClose,str:Math.round((1-body/range)*100),tf:tfLabel,time});
 
-// ── Pin Bar ───────────────────────────────────────────────────────────────
-const bullPin=lWick/range>pinRatio&&body/range<0.3;
-const bearPin=uWick/range>pinRatio&&body/range<0.3;
-if((bullPin||bearPin)&&filters.pinbar&&dirOk(bullPin))
-found.push({sym,signal:‘Pin bar’,bull:bullPin,price:close,gap:gapVsClose,str:Math.round((bullPin?lWick:uWick)/range*100),tf:tfLabel,time});
+  // ── Pin Bar ───────────────────────────────────────────────────────────────
+  const bullPin=lWick/range>pinRatio&&body/range<0.3;
+  const bearPin=uWick/range>pinRatio&&body/range<0.3;
+  if((bullPin||bearPin)&&filters.pinbar&&dirOk(bullPin))
+    found.push({sym,signal:'Pin bar',bull:bullPin,price:close,gap:gapVsClose,str:Math.round((bullPin?lWick:uWick)/range*100),tf:tfLabel,time});
 
-// ── Gap Up ────────────────────────────────────────────────────────────────
-// Condition: open strictly above prior HIGH AND gap % exceeds min threshold
-if(filters.gapup&&dirOk(true)&&gapUpPct>minGap)
-found.push({sym,signal:‘Gap up’,bull:true,price:open,gap:gapVsClose,str:gapStrength(gapUpPct),tf:tfLabel,time});
+  // ── Gap Up ────────────────────────────────────────────────────────────────
+  // Condition: open strictly above prior HIGH AND gap % exceeds min threshold
+  if(filters.gapup&&dirOk(true)&&gapUpPct>minGap)
+    found.push({sym,signal:'Gap up',bull:true,price:open,gap:gapVsClose,str:gapStrength(gapUpPct),tf:tfLabel,time});
 
-// ── Gap Down ──────────────────────────────────────────────────────────────
-// Condition: open strictly below prior LOW AND gap % exceeds min threshold
-if(filters.gapdown&&dirOk(false)&&gapDownPct>minGap)
-found.push({sym,signal:‘Gap down’,bull:false,price:open,gap:gapVsClose,str:gapStrength(gapDownPct),tf:tfLabel,time});
+  // ── Gap Down ──────────────────────────────────────────────────────────────
+  // Condition: open strictly below prior LOW AND gap % exceeds min threshold
+  if(filters.gapdown&&dirOk(false)&&gapDownPct>minGap)
+    found.push({sym,signal:'Gap down',bull:false,price:open,gap:gapVsClose,str:gapStrength(gapDownPct),tf:tfLabel,time});
 
-return found;
+  return found;
 }
 
 async function runScan(){
-const apiKey=document.getElementById(‘apiKey’).value.trim();
-if(!apiKey){setStatus(‘API key required’,’’);return;}
-const tf=document.getElementById(‘tfSelect’).value;
-const mkt=document.getElementById(‘mktSelect’).value;
-const tickers=mkt===‘watch’?WATCHLIST():mkt===‘sp500’?SP500:FULL;
-// Quick connection test before full scan
-setStatus(‘Connecting to Polygon.io…’,‘scanning’);
-const testResult=await fetchCandles(apiKey,‘AAPL’,tf);
-if(!scanning) return; // auth error triggered inside fetchCandles
-if(!testResult){
-setStatus(‘No data returned — check your API key or try a different timeframe.’,’’);
-document.getElementById(‘scanBtn’).disabled=false;
-return;
-}
-scanning=true;
-document.getElementById(‘scanBtn’).disabled=true;
-document.getElementById(‘stopBtn’).style.display=‘inline-block’;
-document.getElementById(‘clearSigBtn’).style.display=‘inline-block’;
-setStatus(‘scanning…’,‘scanning’);
-let scanned=0;
-for(let i=0;i<tickers.length;i++){
-if(!scanning) break;
-const sym=tickers[i];
-const candles=await fetchCandles(apiKey,sym,tf);
-scanned++;
-document.getElementById(‘mScanned’).textContent=scanned;
-setProgress((scanned/tickers.length)*100,‘scanning ‘+sym+’…’);
-if(candles){
-const found=analyze(sym,candles,tf);
-if(found.length){
-let addedNew=false;
-found.forEach(sig=>{
-// Unique key: symbol + signal type + timeframe
-// Same ticker can appear again ONLY if it shows a DIFFERENT signal type
-const key=sig.sym+’|’+sig.signal+’|’+sig.tf;
-const alreadyExists=signals.some(s=>s.sym+’|’+s.signal+’|’+s.tf===key);
-if(!alreadyExists){
-signals.unshift(sig);
-addedNew=true;
-} else {
-// Update the existing signal’s price + time to latest values
-const existing=signals.find(s=>s.sym+’|’+s.signal+’|’+s.tf===key);
-if(existing){ existing.price=sig.price; existing.gap=sig.gap; existing.time=sig.time; existing.str=sig.str; }
-}
-});
-updateMetrics();
-renderSignals();
-if(filters.sound&&addedNew) playAlert();
-}
-}
-await new Promise(r=>setTimeout(r,200)); // slight delay to respect free tier rate limits
-}
-setStatus(‘scan complete · ‘+signals.length+’ signal(s)’,‘live’);
-setProgress(100,‘done’);
-document.getElementById(‘scanBtn’).disabled=false;
-if(filters.auto&&scanning) startCountdown(tf);
+  const apiKey=document.getElementById('apiKey').value.trim();
+  if(!apiKey){setStatus('API key required','');return;}
+  const tf=document.getElementById('tfSelect').value;
+  const mkt=document.getElementById('mktSelect').value;
+  const tickers=mkt==='watch'?WATCHLIST():mkt==='sp500'?SP500:FULL;
+  // Quick connection test before full scan
+  setStatus('Connecting to Polygon.io...','scanning');
+  const testResult=await fetchCandles(apiKey,'AAPL',tf);
+  if(!scanning) return; // auth error triggered inside fetchCandles
+  if(!testResult){
+    setStatus('No data returned — check your API key or try a different timeframe.','');
+    document.getElementById('scanBtn').disabled=false;
+    return;
+  }
+  scanning=true;
+  document.getElementById('scanBtn').disabled=true;
+  document.getElementById('stopBtn').style.display='inline-block';
+  document.getElementById('clearSigBtn').style.display='inline-block';
+  setStatus('scanning...','scanning');
+  let scanned=0;
+  for(let i=0;i<tickers.length;i++){
+    if(!scanning) break;
+    const sym=tickers[i];
+    const candles=await fetchCandles(apiKey,sym,tf);
+    scanned++;
+    document.getElementById('mScanned').textContent=scanned;
+    setProgress((scanned/tickers.length)*100,'scanning '+sym+'...');
+    if(candles){
+      const found=analyze(sym,candles,tf);
+      if(found.length){
+        let addedNew=false;
+        found.forEach(sig=>{
+          // Unique key: symbol + signal type + timeframe
+          // Same ticker can appear again ONLY if it shows a DIFFERENT signal type
+          const key=sig.sym+'|'+sig.signal+'|'+sig.tf;
+          const alreadyExists=signals.some(s=>s.sym+'|'+s.signal+'|'+s.tf===key);
+          if(!alreadyExists){
+            signals.unshift(sig);
+            addedNew=true;
+          } else {
+            // Update the existing signal's price + time to latest values
+            const existing=signals.find(s=>s.sym+'|'+s.signal+'|'+s.tf===key);
+            if(existing){ existing.price=sig.price; existing.gap=sig.gap; existing.time=sig.time; existing.str=sig.str; }
+          }
+        });
+        updateMetrics();
+        renderSignals();
+        if(filters.sound&&addedNew) playAlert();
+      }
+    }
+    await new Promise(r=>setTimeout(r,200)); // slight delay to respect free tier rate limits
+  }
+  setStatus('scan complete · '+signals.length+' signal(s)','live');
+  setProgress(100,'done');
+  document.getElementById('scanBtn').disabled=false;
+  if(filters.auto&&scanning) startCountdown(tf);
 }
 
 function startCountdown(tf){
-countdown=60;
-clearInterval(countdownTimer);
-countdownTimer=setInterval(()=>{
-countdown–;
-document.getElementById(‘timerBadge’).textContent=’· refresh in ‘+countdown+‘s’;
-if(countdown<=0){
-clearInterval(countdownTimer);
-document.getElementById(‘timerBadge’).textContent=’’;
-if(scanning) runScan();
-}
-},1000);
+  countdown=60;
+  clearInterval(countdownTimer);
+  countdownTimer=setInterval(()=>{
+    countdown--;
+    document.getElementById('timerBadge').textContent='· refresh in '+countdown+'s';
+    if(countdown<=0){
+      clearInterval(countdownTimer);
+      document.getElementById('timerBadge').textContent='';
+      if(scanning) runScan();
+    }
+  },1000);
 }
 
 function startScan(){
-signals=[];updateMetrics();
-document.getElementById(‘mScanned’).textContent=‘0’;
-document.getElementById(‘sigBody’).innerHTML=’<tr><td colspan="8"><div class="empty">Scanning in progress…</div></td></tr>’;
-clearInterval(countdownTimer);
-document.getElementById(‘timerBadge’).textContent=’’;
-runScan();
+  signals=[];updateMetrics();
+  document.getElementById('mScanned').textContent='0';
+  document.getElementById('sigBody').innerHTML='<tr><td colspan="8"><div class="empty">Scanning in progress...</div></td></tr>';
+  clearInterval(countdownTimer);
+  document.getElementById('timerBadge').textContent='';
+  runScan();
 }
 
 function stopScan(){
-scanning=false;
-clearInterval(countdownTimer);
-document.getElementById(‘timerBadge’).textContent=’’;
-document.getElementById(‘stopBtn’).style.display=‘none’;
-document.getElementById(‘scanBtn’).disabled=false;
-setStatus(‘stopped’,’’);
-setProgress(0,‘ready’);
+  scanning=false;
+  clearInterval(countdownTimer);
+  document.getElementById('timerBadge').textContent='';
+  document.getElementById('stopBtn').style.display='none';
+  document.getElementById('scanBtn').disabled=false;
+  setStatus('stopped','');
+  setProgress(0,'ready');
 }
 
 function clearSignals(){
-signals=[];
-updateMetrics();
-document.getElementById(‘mScanned’).textContent=‘0’;
-renderSignals();
-setProgress(0,‘ready’);
-setStatus(‘Signals cleared — ready to scan.’,’’);
+  signals=[];
+  updateMetrics();
+  document.getElementById('mScanned').textContent='0';
+  renderSignals();
+  setProgress(0,'ready');
+  setStatus('Signals cleared — ready to scan.','');
 }
 
 function clearSignals(){
-signals=[];
-updateMetrics();
-document.getElementById(‘mScanned’).textContent=‘0’;
-renderSignals();
-setProgress(0,‘ready’);
-setStatus(‘Signals cleared. Ready to scan.’,’’);
+  signals=[];
+  updateMetrics();
+  document.getElementById('mScanned').textContent='0';
+  renderSignals();
+  setProgress(0,'ready');
+  setStatus('Signals cleared. Ready to scan.','');
 }
 </script>
-
 </body>
 </html>
