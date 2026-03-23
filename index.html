@@ -101,6 +101,18 @@
   .key-status { font-size: 11px; font-family: var(--mono); margin-top: 4px; }
   .key-status.saved { color: var(--accent); }
   .key-status.cleared { color: var(--muted); }
+  .btn-clear-sig {
+    padding: 10px 14px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border2);
+    background: transparent; color: var(--muted); transition: all 0.2s;
+  }
+  .btn-clear-sig:hover { border-color: var(--amber); color: var(--amber); }
+  .btn-clear-sig {
+    padding: 10px 14px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
+    font-weight: 500; cursor: pointer; border: 1px solid var(--border2);
+    background: transparent; color: var(--muted); transition: all 0.2s; display:none;
+  }
+  .btn-clear-sig:hover { border-color: var(--amber); color: var(--amber); }
   .btn-stop {
     padding: 10px 18px; border-radius: 8px; font-family: var(--sans); font-size: 13px;
     font-weight: 500; cursor: pointer; border: 1px solid var(--red);
@@ -207,6 +219,7 @@
     <button class="btn-clear" id="clearKeyBtn" onclick="clearKey()">Forget key</button>
     <button class="btn-scan" id="scanBtn" onclick="startScan()">Scan market</button>
     <button class="btn-stop" id="stopBtn" onclick="stopScan()">Stop</button>
+    <button class="btn-clear-sig" id="clearSigBtn" onclick="clearSignals()">Clear signals</button>
   </div>
 
   <div id="keyStatus" class="key-status" style="margin-bottom:10px;margin-top:-8px;"></div>
@@ -443,7 +456,7 @@ function renderSignals(){
     body.innerHTML='<tr><td colspan="8"><div class="empty">No signals detected yet.<p>Scanning in progress — signals appear as they are found.</p></div></td></tr>';
     return;
   }
-  body.innerHTML=signals.slice().reverse().slice(0,80).map((r,i)=>{
+  body.innerHTML=signals.slice(0,80).map((r,i)=>{
     const bCls=r.signal==='Doji'?'bd':r.signal==='Pin bar'?'bp':r.signal==='Gap down'?'bgd':'bg';
     const dCls=r.bull?'bb':'bbe';
     const gStr=(r.gap>0?'+':'')+r.gap.toFixed(2)+'%';
@@ -504,46 +517,50 @@ function analyze(sym,candles,tf){
   const lWick=Math.min(open,close)-low,uWick=high-Math.max(open,close);
   const bull=close>=open;
 
-  // Gap = open vs prior CLOSE (true gap — price jumped between sessions)
-  const gap=((open-prev.c)/prev.c)*100;
+  // TRUE GAP: open must be strictly outside the prior candle's full range
+  // Gap Up  = current open > prior HIGH (price opened above all of prior candle)
+  // Gap Down = current open < prior LOW  (price opened below all of prior candle)
+  const gapUpPct   = ((open - prev.h) / prev.h) * 100;   // positive = real gap up
+  const gapDownPct = ((prev.l - open) / prev.l) * 100;   // positive = real gap down
 
-  // Also check full candle move for higher TF context
-  const candleMove=((close-prev.c)/prev.c)*100;
+  // Percentage gap vs prior close (used for display and strength)
+  const gapVsClose = ((open - prev.c) / prev.c) * 100;
 
-  // Dynamic gap threshold per timeframe
-  // Lower TFs need small threshold; higher TFs need bigger moves to be meaningful
-  const gapThreshold = tf==='M'?3 : tf==='W'?2 : tf==='D'?1 : tf==='240'?0.8 : 0.4;
+  // Minimum gap size per timeframe — scaled to typical session volatility
+  // Intraday: even tiny gaps matter; Daily+: need meaningful overnight move
+  const minGap = tf==='M'?2.5 : tf==='W'?1.5 : tf==='D'?0.75 : tf==='240'?0.5 : tf==='60'?0.3 : 0.15;
 
-  // Doji body ratio loosens slightly on higher TFs (candles are noisier)
-  const dojiRatio = (tf==='D'||tf==='W'||tf==='M') ? 0.2 : 0.15;
+  // Strength score: how large is the gap relative to the minimum threshold (capped 100)
+  const gapStrength=(pct)=>Math.min(100,Math.round((Math.abs(pct)/minGap)*40));
 
-  // Pin bar wick ratio — keep strict on all TFs
-  const pinRatio = 0.6;
+  // Doji body ratio — slightly looser on higher TFs
+  const dojiRatio=(tf==='D'||tf==='W'||tf==='M')?0.2:0.15;
+  const pinRatio=0.6;
 
   const time=new Date(last.t).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
   const tfLabel=({'D':'Day','W':'Week','M':'Month','240':'4H'})[tf]||(tf+'m');
   const found=[];
   const dirOk=(isBull)=>(!filters.bull&&!filters.bear)||(filters.bull&&isBull)||(filters.bear&&!isBull);
 
-  // Doji detection
+  // ── Doji ──────────────────────────────────────────────────────────────────
   if(body/range<dojiRatio&&filters.doji&&dirOk(bull))
-    found.push({sym,signal:'Doji',bull,price:close,gap,str:Math.round((1-body/range)*100),tf:tfLabel,time});
+    found.push({sym,signal:'Doji',bull,price:close,gap:gapVsClose,str:Math.round((1-body/range)*100),tf:tfLabel,time});
 
-  // Pin bar detection
-  const bullPin=lWick/range>pinRatio&&body/range<0.3,bearPin=uWick/range>pinRatio&&body/range<0.3;
+  // ── Pin Bar ───────────────────────────────────────────────────────────────
+  const bullPin=lWick/range>pinRatio&&body/range<0.3;
+  const bearPin=uWick/range>pinRatio&&body/range<0.3;
   if((bullPin||bearPin)&&filters.pinbar&&dirOk(bullPin))
-    found.push({sym,signal:'Pin bar',bull:bullPin,price:close,gap,str:Math.round((bullPin?lWick:uWick)/range*100),tf:tfLabel,time});
+    found.push({sym,signal:'Pin bar',bull:bullPin,price:close,gap:gapVsClose,str:Math.round((bullPin?lWick:uWick)/range*100),tf:tfLabel,time});
 
-  // Gap Up — true open gap above threshold
-  // On higher TFs also catch strong bullish candles that opened with a gap
-  const effectiveGapUp = gap>gapThreshold || (tf==='D'&&candleMove>gapThreshold*1.5&&gap>0);
-  if(effectiveGapUp&&filters.gapup&&dirOk(true))
-    found.push({sym,signal:'Gap up',bull:true,price:open,gap,str:Math.min(100,Math.round(Math.abs(gap)/gapThreshold*50)),tf:tfLabel,time});
+  // ── Gap Up ────────────────────────────────────────────────────────────────
+  // Condition: open strictly above prior HIGH AND gap % exceeds min threshold
+  if(filters.gapup&&dirOk(true)&&gapUpPct>minGap)
+    found.push({sym,signal:'Gap up',bull:true,price:open,gap:gapVsClose,str:gapStrength(gapUpPct),tf:tfLabel,time});
 
-  // Gap Down — same logic inverted
-  const effectiveGapDown = gap<-gapThreshold || (tf==='D'&&candleMove<-gapThreshold*1.5&&gap<0);
-  if(effectiveGapDown&&filters.gapdown&&dirOk(false))
-    found.push({sym,signal:'Gap down',bull:false,price:open,gap,str:Math.min(100,Math.round(Math.abs(gap)/gapThreshold*50)),tf:tfLabel,time});
+  // ── Gap Down ──────────────────────────────────────────────────────────────
+  // Condition: open strictly below prior LOW AND gap % exceeds min threshold
+  if(filters.gapdown&&dirOk(false)&&gapDownPct>minGap)
+    found.push({sym,signal:'Gap down',bull:false,price:open,gap:gapVsClose,str:gapStrength(gapDownPct),tf:tfLabel,time});
 
   return found;
 }
@@ -557,6 +574,7 @@ async function runScan(){
   scanning=true;
   document.getElementById('scanBtn').disabled=true;
   document.getElementById('stopBtn').style.display='inline-block';
+  document.getElementById('clearSigBtn').style.display='inline-block';
   setStatus('scanning...','scanning');
   let scanned=0;
   for(let i=0;i<tickers.length;i++){
@@ -569,11 +587,24 @@ async function runScan(){
     if(candles){
       const found=analyze(sym,candles,tf);
       if(found.length){
-        const isNew=!signals.some(s=>s.sym===found[0].sym&&s.signal===found[0].signal);
-        signals.push(...found);
+        let addedNew=false;
+        found.forEach(sig=>{
+          // Unique key: symbol + signal type + timeframe
+          // Same ticker can appear again ONLY if it shows a DIFFERENT signal type
+          const key=sig.sym+'|'+sig.signal+'|'+sig.tf;
+          const alreadyExists=signals.some(s=>s.sym+'|'+s.signal+'|'+s.tf===key);
+          if(!alreadyExists){
+            signals.unshift(sig);
+            addedNew=true;
+          } else {
+            // Update the existing signal's price + time to latest values
+            const existing=signals.find(s=>s.sym+'|'+s.signal+'|'+s.tf===key);
+            if(existing){ existing.price=sig.price; existing.gap=sig.gap; existing.time=sig.time; existing.str=sig.str; }
+          }
+        });
         updateMetrics();
         renderSignals();
-        if(filters.sound&&isNew) playAlert();
+        if(filters.sound&&addedNew) playAlert();
       }
     }
     await new Promise(r=>setTimeout(r,130));
@@ -601,6 +632,7 @@ function startCountdown(tf){
 function startScan(){
   signals=[];updateMetrics();
   document.getElementById('mScanned').textContent='0';
+  document.getElementById('sigBody').innerHTML='<tr><td colspan="8"><div class="empty">Scanning in progress...</div></td></tr>';
   clearInterval(countdownTimer);
   document.getElementById('timerBadge').textContent='';
   runScan();
@@ -614,6 +646,24 @@ function stopScan(){
   document.getElementById('scanBtn').disabled=false;
   setStatus('stopped','');
   setProgress(0,'ready');
+}
+
+function clearSignals(){
+  signals=[];
+  updateMetrics();
+  document.getElementById('mScanned').textContent='0';
+  renderSignals();
+  setProgress(0,'ready');
+  setStatus('Signals cleared — ready to scan.','');
+}
+
+function clearSignals(){
+  signals=[];
+  updateMetrics();
+  document.getElementById('mScanned').textContent='0';
+  renderSignals();
+  setProgress(0,'ready');
+  setStatus('Signals cleared. Ready to scan.','');
 }
 </script>
 </body>
