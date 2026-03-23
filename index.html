@@ -111,6 +111,7 @@
   .bd { background: rgba(123,97,255,0.15); color: #a78bfa; border: 1px solid rgba(123,97,255,0.3); }
   .bp { background: rgba(255,184,48,0.12); color: var(--amber); border: 1px solid rgba(255,184,48,0.3); }
   .bg { background: rgba(79,255,176,0.1); color: var(--accent); border: 1px solid rgba(79,255,176,0.25); }
+  .bgd { background: rgba(255,78,78,0.1); color: var(--red); border: 1px solid rgba(255,78,78,0.25); }
   .bb { background: rgba(79,255,176,0.1); color: var(--accent); border: 1px solid rgba(79,255,176,0.2); }
   .bbe { background: rgba(255,78,78,0.1); color: var(--red); border: 1px solid rgba(255,78,78,0.2); }
 
@@ -177,6 +178,7 @@
     <button class="fbtn on purple" id="f-doji" onclick="toggleF('doji',this,'purple')">Doji</button>
     <button class="fbtn on amber" id="f-pinbar" onclick="toggleF('pinbar',this,'amber')">Pin bar</button>
     <button class="fbtn on" id="f-gapup" onclick="toggleF('gapup',this,'')">Gap up</button>
+    <button class="fbtn on" id="f-gapdown" onclick="toggleF('gapdown',this,'')">Gap down</button>
     <button class="fbtn on" id="f-bull" onclick="setDirection('bull',this)">Bullish only</button>
     <button class="fbtn" id="f-bear" onclick="setDirection('bear',this)">Bearish only</button>
     <button class="fbtn" id="f-sound" onclick="toggleF('sound',this,'')">Sound alert</button>
@@ -196,6 +198,9 @@
     <div class="mc"><div class="mc-label">signals</div><div class="mc-val g" id="mSignals">0</div></div>
     <div class="mc"><div class="mc-label">doji / pin bar</div><div class="mc-val a" id="mDoji">0</div></div>
     <div class="mc"><div class="mc-label">gap ups</div><div class="mc-val p" id="mGap">0</div></div>
+  </div>
+  <div class="metrics" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:-6px;">
+    <div class="mc"><div class="mc-label">gap downs</div><div class="mc-val r" id="mGapDown">0</div></div>
   </div>
 
   <div class="tbl-wrap">
@@ -226,7 +231,7 @@ const SP500=['AAPL','MSFT','NVDA','AMZN','META','GOOGL','TSLA','JPM','V','UNH','
 const WATCHLIST=['AAPL','MSFT','NVDA','TSLA','AMZN','META','GOOGL','SPY','QQQ','AMD','SOFI','PLTR','COIN','MELI','SHOP','DDOG'];
 const FULL=[...SP500,'SPY','QQQ','IWM','DIA','ARKK','SQQQ','TQQQ','SPXU','UVXY','VXX','SOXL','SOXS','LABU','LABD','TNA','TZA','FAS','FAZ','NUGT','DUST','JNUG','JDST','ERX','ERY','GUSH','DRIP','NAIL','DRN','DRV','HIBL','HIBS','CURE','SICK','WANT','NEED','PILL','CLOV','WISH','WKHS','RIDE','NKLA','GOEV','HIMS','OPEN','OFFERPAD','SPCE','ASTS','LUNR','RKLB','MNTS','IONQ','QUBT','RGTI','ARQQ','BBAI','SOUN','AIOT','AITX','AIXI'];
 
-const filters={doji:true,pinbar:true,gapup:true,bull:true,bear:false,sound:false,auto:true};
+const filters={doji:true,pinbar:true,gapup:true,gapdown:true,bull:true,bear:false,sound:false,auto:true};
 let scanning=false,signals=[],countdownTimer=null,countdown=60;
 
 function toggleF(k,btn,colorClass){
@@ -276,6 +281,7 @@ function updateMetrics(){
   document.getElementById('mSignals').textContent=signals.length;
   document.getElementById('mDoji').textContent=signals.filter(s=>s.signal==='Doji'||s.signal==='Pin bar').length;
   document.getElementById('mGap').textContent=signals.filter(s=>s.signal==='Gap up').length;
+  document.getElementById('mGapDown').textContent=signals.filter(s=>s.signal==='Gap down').length;
 }
 
 function renderSignals(){
@@ -285,7 +291,7 @@ function renderSignals(){
     return;
   }
   body.innerHTML=signals.slice().reverse().slice(0,80).map((r,i)=>{
-    const bCls=r.signal==='Doji'?'bd':r.signal==='Pin bar'?'bp':'bg';
+    const bCls=r.signal==='Doji'?'bd':r.signal==='Pin bar'?'bp':r.signal==='Gap down'?'bgd':'bg';
     const dCls=r.bull?'bb':'bbe';
     const gStr=(r.gap>0?'+':'')+r.gap.toFixed(2)+'%';
     const fillC=r.str>65?'#4fffb0':r.str>35?'#ffb830':'#ff4e4e';
@@ -345,6 +351,8 @@ function analyze(sym,candles,tf){
     found.push({sym,signal:'Pin bar',bull:bullPin,price:close,gap,str:Math.round((bullPin?lWick:uWick)/range*100),tf:tfLabel,time});
   if(gap>0.4&&filters.gapup&&dirOk(true))
     found.push({sym,signal:'Gap up',bull:true,price:open,gap,str:Math.min(100,Math.round(gap*15)),tf:tfLabel,time});
+  if(gap<-0.4&&filters.gapdown&&dirOk(false))
+    found.push({sym,signal:'Gap down',bull:false,price:open,gap,str:Math.min(100,Math.round(Math.abs(gap)*15)),tf:tfLabel,time});
   return found;
 }
 
